@@ -1,13 +1,13 @@
-// const http = require('http');
+const path = require('path');
 const express= require('express');//importa la libreria express
 const app =express();//llamas al metodo express
 const adminRoute= require('./routes/admin')
 const shopRoute=require('./routes/shop')
 app.use(express.urlencoded({extended:true})) //sirve para poder tomar los argumentos del get o post
-app.use(adminRoute)
+app.use("/admin",adminRoute)
 app.use(shopRoute)
 app.use((req,res,next)=>{
-    res.status(404).send('<h1>Page no found!</h1>')
+    res.status(404).sendFile(path.join(__dirname,'views','404.html'))
 })
 app.listen(3000)//de esta manera queda mas simple y ya no se necesita utilizar el require('http')
 // npm init -f
